@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import {AnimatePresence, motion} from 'framer-motion'
 import { Bell,  Rocket, User } from 'lucide-react'
 import{HiMenu,HiX} from 'react-icons/hi'
+import { AuthContext } from '../context/AuthContext'
 
 const Header = () => {
 
 
   const location= useLocation()
+  const {user,logout}= useContext(AuthContext)
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
@@ -112,9 +114,10 @@ const Header = () => {
                   
                 </div>
               ):(
-            <div className='flex items-center gap-4 '>
+            <div className='flex flex-col gap-4 mt-2 '>
               <Link to="/login" className='text-neutral-700 hover:text-yellow-500 transition-all font-medium' onClick={() => { setIsMobileMenuOpen(false) }}>Login</Link>
-              <Link to="/register" className='ml-2 bg-linear-to-r from-yellow-400 to-orange-500 px-4 py-1.5 rounded-full font-medium text-white transition-all hover:shadow-lg hover:shadow-yellow-300/40' onClick={() => { setIsMobileMenuOpen(false) }}>Register</Link>
+              <Link onClick={()=> setIsMobileMenuOpen(false)}  to="/register" className='ml-2 bg-linear-to-r from-yellow-400 to-orange-500 px-4 py-1.5 rounded-full font-medium text-white 
+        hover:shadow-lg hover:shadow-yellow-300/40 transition-all'>Create Account</Link>
 
 
             </div>
